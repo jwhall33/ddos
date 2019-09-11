@@ -17,3 +17,38 @@ How I decided to do this:
 	11b. I also didn't setup my environment to do this in an IDE so I just copied files around in order to get the results.
 12. So now when I run spark-submit; I'm able to see the list of IP addresses and the number of log entries when they reach the threshold defined in the rdd filter.
 13. If time allowed, there are a few ML implementations [here](https://github.com/lbnl-cybersecurity/ddos-detection/tree/master/detection_framework) that look appealing!  
+
+# Setup
+
+Run Kafka and Zookeeper  
+`bin/zookeeper-server-start.sh config/zookeeper.properties &`
+
+`bin/kafka-server-start.sh config/server.properties &`
+
+Next, create a few topics:  
+`bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic http-log --partitions 1 --replication-factor 1`
+
+`bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic http-threat --partitions 1 --replication-factor 1`
+
+Then I open another terminal and start a console consumer for threats:  
+`bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic http-threat --from-beginning`
+
+Now I'm ready to run spark.  For simplicity, I just copy spark_stream.py into my spark folder and run:  
+`bin/spark-submit --jars jars/spark-streaming-kafka-0-10-assembly_2.11-2.4.4.jar spark_stream.py`
+(Yes, I'm trying different streaming jars; and I updated my pyspark exports for python3)  
+
+Now in my IDE, I run my producer.py...
+
+Then you should start to see messages in the console consumer!  
+ `["247.219.189.52", 89]  
+["133.129.191.60", 89]  
+["227.6.52.250", 89]  
+["233.7.245.219", 89]  
+["233.33.63.76", 89]  
+["91.157.33.242", 89]  
+["164.5.82.157", 89]  
+["35.73.43.29", 89]  
+["181.66.224.69", 89]  
+["72.173.153.131", 89]  
+["1.92.109.196", 89]  
+Processed a total of 351 messages`  
