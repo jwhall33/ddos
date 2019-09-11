@@ -34,7 +34,7 @@ Then I open another terminal and start a console consumer for threats:
 `bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic http-threat --from-beginning`
 
 Now I'm ready to run spark.  For simplicity, I just copy spark_stream.py into my spark folder and run:  
-`bin/spark-submit --jars jars/spark-streaming-kafka-0-10-assembly_2.11-2.4.4.jar spark_stream.py`
+`bin/spark-submit --jars jars/spark-streaming-kafka-0-10-assembly_2.11-2.4.4.jar spark_stream.py`  
 (Yes, I'm trying different streaming jars; and I updated my pyspark exports for python3)  
 
 Now in my IDE, I run my producer.py...
