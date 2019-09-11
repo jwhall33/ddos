@@ -40,7 +40,7 @@ Now I'm ready to run spark.  For simplicity, I just copy spark_stream.py into my
 Now in my IDE, I run my producer.py...
 
 Then you should start to see messages in the console consumer!  
- `["247.219.189.52", 89]  
+["247.219.189.52", 89]  
 ["133.129.191.60", 89]  
 ["227.6.52.250", 89]  
 ["233.7.245.219", 89]  
@@ -51,4 +51,4 @@ Then you should start to see messages in the console consumer!
 ["181.66.224.69", 89]  
 ["72.173.153.131", 89]  
 ["1.92.109.196", 89]  
-Processed a total of 351 messages`  
+Processed a total of 351 messages  
